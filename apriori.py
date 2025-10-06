@@ -1,4 +1,5 @@
 import sys
+from database import Database
 
 file_name = sys.argv[1] #this is the file path we will be opening
 sup = sys.argv[2] #minimum support
