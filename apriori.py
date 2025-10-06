@@ -17,7 +17,7 @@ def apriori():
     for transaction in data.transactions:
         for item in transaction:
             c_table[item] = c_table.get(item, 0) + 1
-    
+    #print(f"Initial C0 table is: \n{c_table}")
     make_l_table(c_table) # should recurse back and forth, updating our solution.
 
         
@@ -28,14 +28,14 @@ def make_c_table(l_table:dict):
         flag = False
         for item_2 in l_table:
             if (flag):
-                key = set(item_1).union(set(item_2))
+                key = set(item_1).union(set(item_2)) #Doesn't work properly
                 key_string= "".join(list(key))
                 if (len(key_string) == len(item_1)+1):
                     c_table[key_string] = 0  
             if (item_1 == item_2):
                 flag = True
-
-    fill_c_table(c_table)
+    if(len(c_table)>0):
+        fill_c_table(c_table)
 
 
 def fill_c_table(c_table:dict):
@@ -44,7 +44,7 @@ def fill_c_table(c_table:dict):
             interesect = set(key) & set(transaction)
             if (len(set(key)) == len(interesect)):
                 c_table[key] = c_table.get(key) + 1
-    print(f"c table is \n{c_table}") 
+    #print(f"c table is \n{c_table}") 
 
     make_l_table(c_table)
 
@@ -53,7 +53,7 @@ def make_l_table(c_table:dict):
     for item in c_table:
         if (c_table[item] >= min_sup):
             l_table[item] = c_table[item]
-    print(f"l table is \n{l_table}")
+    #print(f"l table is \n{l_table}")
 
     global frequent_patterns
     frequent_patterns.update(l_table)
@@ -66,13 +66,10 @@ def main():
     data = Database(file_name)
     global min_sup
     min_sup = int(data.size * sup_percent) #amount of items * sup_percent -> MST
+    #print(f"initial min sup is: \n{min_sup}")
     apriori()
     global frequent_patterns
     print(f"\nThe frequent patterns are {frequent_patterns}")
 
 if __name__ == "__main__":
         main()
-
-
-#def generate_c_table(l_table:list):
-
