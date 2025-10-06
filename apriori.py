@@ -17,13 +17,7 @@ def apriori():
         for item in transaction:
             c_table[item] = c_table.get(item, 0) + 1
     
-    # initialized the L0 table
-    l_table: dict = {}
-    for item in c_table:
-        if (c_table[item] >= min_sup):
-            l_table[item] = c_table[item]
-
-    make_c_table(l_table) # should recurse back and forth, updating our solution.
+    make_l_table(c_table) # should recurse back and forth, updating our solution.
 
         
 def make_c_table(l_table:dict):
@@ -39,18 +33,25 @@ def make_c_table(l_table:dict):
                     c_table[key_string] = 0  
             if (item_1 == item_2):
                 flag = True
-    make_l_table(c_table)
+    fill_c_table(c_table)
 
 
-def make_l_table(c_table:dict):
-    l_table:dict = {}
+def fill_c_table(c_table:dict):
     for key in c_table:
         for transaction in data.transactions:
             interesect = set(key) & set(transaction)
             if (len(set(key)) == len(interesect)):
-                l_table[key] = l_table.get(key,0) + 1
-    print(l_table)
-    if (len(l_table) > 1):
+                c_table[key] = c_table.get(key) + 1
+    print(f"c table is \n{c_table}")
+    make_l_table(c_table)
+
+def make_l_table(c_table:dict):
+    l_table: dict = {}
+    for item in c_table:
+        if (c_table[item] >= min_sup):
+            l_table[item] = c_table[item]
+    print(f"l table is \n{l_table}")
+    if (len(l_table)>1):
         make_c_table(l_table)
 
 def main():
