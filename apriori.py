@@ -13,43 +13,43 @@ frequent_patterns:dict ={}
 def apriori():
     
     # initializes the C0 table 
-    c_table:dict = {}
+    c_table:dict[frozenset, int] = {}
     for transaction in data.transactions:
         for item in transaction:
-            c_table[item] = c_table.get(item, 0) + 1
+            key = frozenset([item])
+            c_table[key] = c_table.get(key, 0) + 1
     #print(f"Initial C0 table is: \n{c_table}")
     make_l_table(c_table) # should recurse back and forth, updating our solution.
 
         
-def make_c_table(l_table:dict):
-    c_table: dict = {}
+def make_c_table(l_table:dict[frozenset, int]):
+    c_table: dict[frozenset, int] = {}
     flag: bool = False
     for item_1 in l_table:
         flag = False
         for item_2 in l_table:
             if (flag):
-                key = set(item_1).union(set(item_2)) #Doesn't work properly
-                key_string= "".join(list(key))
-                if (len(key_string) == len(item_1)+1):
-                    c_table[key_string] = 0  
+                key = item_1.union(item_2)
+                if (len(key) == len(item_1)+1):
+                    c_table[key] = 0  
             if (item_1 == item_2):
                 flag = True
     if(len(c_table)>0):
         fill_c_table(c_table)
 
 
-def fill_c_table(c_table:dict):
+def fill_c_table(c_table:dict[frozenset, int]):
     for key in c_table:
         for transaction in data.transactions:
-            interesect = set(key) & set(transaction)
-            if (len(set(key)) == len(interesect)):
+            interesect = key.intersection(transaction)
+            if (len(key) == len(interesect)):
                 c_table[key] = c_table.get(key) + 1
     #print(f"c table is \n{c_table}") 
 
     make_l_table(c_table)
 
-def make_l_table(c_table:dict):
-    l_table: dict = {}
+def make_l_table(c_table:dict[frozenset, int]):
+    l_table: dict[frozenset, int] = {}
     for item in c_table:
         if (c_table[item] >= min_sup):
             l_table[item] = c_table[item]
@@ -69,7 +69,9 @@ def main():
     #print(f"initial min sup is: \n{min_sup}")
     apriori()
     global frequent_patterns
-    print(f"\nThe frequent patterns are {frequent_patterns}")
+    print("The frequent patterns are: \n ------------------------")
+    for elem in frequent_patterns:
+        print(f"{set(elem)} : {frequent_patterns[elem]}")
 
 if __name__ == "__main__":
         main()
