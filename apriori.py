@@ -70,6 +70,7 @@ def main():
     apriori()
     global frequent_patterns
     print("The frequent patterns are: \n ------------------------")
+    print(f" |FPs| = {len(frequent_patterns)}")
     for elem in frequent_patterns:
         print(f"{set(elem)} : {frequent_patterns[elem]}")
 
