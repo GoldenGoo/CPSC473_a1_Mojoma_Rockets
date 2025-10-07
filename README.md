@@ -17,10 +17,12 @@ Team Members
 2. Insert the command py apriori.py <data file name> <minimum support threshold>
 ex. 
 a. py apriori.py connect.txt 99
+
 b. py apriori.py data.txt 50
+
 c. py apriori.py 1k5L.txt 60
 
-3. The output should appear shortly afterwards
+4. The output should appear shortly afterwards
 
 
 **Algorithm Overview**:
