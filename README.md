@@ -15,7 +15,9 @@ Team Members
 **If you wish to run the code** :
 1. Navigate to the directory of the "CPSC473_a1_Mojoma_Rockets" Rockets
 2. Insert the command py apriori.py <data file name> <minimum support threshold>
-ex. 
+
+ex:
+
 a. py apriori.py connect.txt 99
 
 b. py apriori.py data.txt 50
