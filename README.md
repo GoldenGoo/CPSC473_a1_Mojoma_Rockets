@@ -9,7 +9,7 @@ Assignment 1
 Team Members
 1. **Josh Holuboch**
 2. **Mateus de Abreu**
-3.**Muhammad Olaniyan**
+3. **Muhammad Olaniyan**
 
 
 **If you wish to run the code** :
