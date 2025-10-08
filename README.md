@@ -24,7 +24,7 @@ b. py apriori.py data.txt 50
 
 c. py apriori.py 1k5L.txt 60
 
-4. The output should appear shortly afterwards
+3. The output should appear shortly afterwards
 
 
 ### **Algorithm Overview**:
