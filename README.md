@@ -16,13 +16,13 @@ Assignment 1
 1. Navigate to the directory of the "CPSC473_a1_Mojoma_Rockets" Rockets
 2. Insert the command py apriori.py "data file name" "minimum support threshold percent"
 
-ex:
+        ex:
 
-a. py apriori.py connect.txt 99
+        a. py apriori.py connect.txt 99
 
-b. py apriori.py data.txt 50
+        b. py apriori.py data.txt 50
 
-c. py apriori.py 1k5L.txt 60
+        c. py apriori.py 1k5L.txt 60
 
 3. The output should appear shortly afterwards
 

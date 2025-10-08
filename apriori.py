@@ -19,7 +19,12 @@ def apriori():
             key = frozenset([item])
             c_table[key] = c_table.get(key, 0) + 1
     #print(f"Initial C0 table is: \n{c_table}")
-    make_l_table(c_table) # should recurse back and forth, updating our solution.
+    l_table: dict[frozenset, int] = {}
+    l_table = make_l_table(c_table) # initialize the first l table
+
+    while (len(l_table)>1): 
+        c_table = make_c_table(l_table)
+        l_table = make_l_table(c_table)
 
         
 def make_c_table(l_table:dict[frozenset, int]):
@@ -35,7 +40,8 @@ def make_c_table(l_table:dict[frozenset, int]):
             if (item_1 == item_2):
                 flag = True
     if(len(c_table)>0):
-        fill_c_table(c_table)
+        c_table = fill_c_table(c_table)
+        return c_table
 
 
 def fill_c_table(c_table:dict[frozenset, int]):
@@ -46,7 +52,7 @@ def fill_c_table(c_table:dict[frozenset, int]):
                 c_table[key] = c_table.get(key) + 1
     #print(f"c table is \n{c_table}") 
 
-    make_l_table(c_table)
+    return c_table
 
 def make_l_table(c_table:dict[frozenset, int]):
     l_table: dict[frozenset, int] = {}
@@ -58,8 +64,7 @@ def make_l_table(c_table:dict[frozenset, int]):
     global frequent_patterns
     frequent_patterns.update(l_table)
 
-    if (len(l_table)>1):
-        make_c_table(l_table)
+    return l_table
 
 def main():
     global data 
