@@ -6,15 +6,15 @@ School: University Of Northern British Columbia(UNBC)
 Semester : Fall 2025
 Assignment 1
 
-Team Members
+### Team Members
 1. **Josh Holuboch**
 2. **Mateus de Abreu**
 3. **Muhammad Olaniyan**
 
 
-**If you wish to run the code** :
+### **If you wish to run the code** :
 1. Navigate to the directory of the "CPSC473_a1_Mojoma_Rockets" Rockets
-2. Insert the command py apriori.py <data file name> <minimum support threshold>
+2. Insert the command py apriori.py "data file name" "minimum support threshold percent"
 
 ex:
 
@@ -27,7 +27,7 @@ c. py apriori.py 1k5L.txt 60
 4. The output should appear shortly afterwards
 
 
-**Algorithm Overview**:
+### **Algorithm Overview**:
 
 1. Scan Database to get support for each item
 2. Generate frequent 1 items or L1
