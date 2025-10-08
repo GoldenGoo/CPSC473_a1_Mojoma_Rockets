@@ -20,11 +20,12 @@ def apriori():
             c_table[key] = c_table.get(key, 0) + 1
     #print(f"Initial C0 table is: \n{c_table}")
     l_table: dict[frozenset, int] = {}
-    l_table = make_l_table(c_table) # initialize the first l table
+    l_table = make_l_table(c_table, {}) # initialize the first l table
 
     while (len(l_table)>1): 
         c_table = make_c_table(l_table)
-        l_table = make_l_table(c_table)
+        previous_l_table = l_table
+        l_table = make_l_table(c_table, previous_l_table)
 
         
 def make_c_table(l_table:dict[frozenset, int]):
@@ -54,17 +55,38 @@ def fill_c_table(c_table:dict[frozenset, int]):
 
     return c_table
 
-def make_l_table(c_table:dict[frozenset, int]):
+def make_l_table(c_table:dict[frozenset, int], previous_l_table:dict[frozenset, int]):
     l_table: dict[frozenset, int] = {}
     for item in c_table:
         if (c_table[item] >= min_sup):
             l_table[item] = c_table[item]
     #print(f"l table is \n{l_table}")
 
+    if (len(previous_l_table) > 1):
+        l_table = validate_items(l_table, previous_l_table)
+
     global frequent_patterns
     frequent_patterns.update(l_table)
 
     return l_table
+
+# This is the method where we prune any itemsets which aren't supported by all their
+# frequent subsets. It also likely makes the algorithm slower...
+def validate_items(l_table:dict[frozenset, int], previous_l_table:dict[frozenset, int]):
+    validated_l_table :dict[frozenset, int] = {} 
+    for itemset in l_table:
+        valid:bool = True
+        for item in itemset:
+            if (valid):
+                current_item = frozenset([item])
+                current_itemset:frozenset = itemset - current_item
+                if (current_itemset not in previous_l_table):
+                    valid = False
+        if(valid):
+            validated_l_table[itemset] = l_table[itemset]
+    return validated_l_table
+
+
 
 def main():
     global data 
