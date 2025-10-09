@@ -24,7 +24,9 @@ Assignment 1
 
         c. py apriori.py 1k5L.txt 60
 
-3. The output should appear shortly afterwards
+        d. py apriori.py t25i10d10k.txt 60
+
+3. The output should appear shortly afterwards with the corresponding output file created/updated 
 
 
 ### **Algorithm Overview**:

@@ -1,5 +1,6 @@
 import sys
 from database import Database
+import time
 
 file_name = sys.argv[1] #this is the file path we will be opening
 sup = int(sys.argv[2]) #minimum support
@@ -89,15 +90,30 @@ def validate_items(l_table:dict[frozenset, int], previous_l_table:dict[frozenset
 
 
 def main():
+    global frequent_patterns
     global data 
     data = Database(file_name)
     global min_sup
     min_sup = int(data.size * sup_percent) #amount of items * sup_percent -> MST
     #print(f"initial min sup is: \n{min_sup}")
+
+    start_time= time.time()
     apriori()
-    global frequent_patterns
+    end_time= time.time()
+    elapsed_time= end_time-start_time
+
+    file= open("MiningResult_"+ file_name, "w")
+    file.write(f" |FPs| = {len(frequent_patterns)}\n")
+    for elem in frequent_patterns:
+        file.write(f"{set(elem)} : {frequent_patterns[elem]}\n")
+
+    file.close
+
+   
     print("The frequent patterns are: \n ------------------------")
+    print(f" The minimum support threshold is {min_sup}")
     print(f" |FPs| = {len(frequent_patterns)}")
+    print(f"Total Runtime = {elapsed_time: .3f} sec")
     for elem in frequent_patterns:
         print(f"{set(elem)} : {frequent_patterns[elem]}")
 
