@@ -1,10 +1,10 @@
 # CPSC473_a1_Mojoma_Rockets
 This is a repository to track code changes for the Apriori Algorithm for frequent pattern mining ina transaction databases. It  identifies frequent itemsets that meet a user indicated minimum support threshold. 
 
-Course: CPSC 473- Introduction to Data Mining
-School: University Of Northern British Columbia(UNBC)
-Semester : Fall 2025
-Assignment 1
+#Course #: CPSC 473- Introduction to Data Mining\
+#School#: University Of Northern British Columbia(UNBC)\
+#Semester# : Fall 2025\
+#Assignment 1#
 
 ### Team Members
 1. **Josh Holuboch**
@@ -13,7 +13,7 @@ Assignment 1
 
 
 ### **If you wish to run the code** :
-1. Navigate to the directory of the "CPSC473_a1_Mojoma_Rockets" Rockets
+1. Navigate to the directory of the "CPSC473_a1_Mojoma_Rockets" Rockets\
 2. Insert the command py apriori.py "data file name" "minimum support threshold percent"
 
         ex:
